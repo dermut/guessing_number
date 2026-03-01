@@ -1,34 +1,40 @@
 /* =====================================================
-   숫자 맞추기 게임 - 레트로 픽셀 스타일
+   숫자 맞추기 게임 - 클린 카드 테마
    ===================================================== */
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  image-rendering: pixelated;
 }
 
 :root {
-  --bg: #0a0a0f;
-  --green: #00ff41;
-  --green-dim: #00aa2b;
-  --red: #ff4136;
-  --gold: #ffd700;
-  --white: #e0e0e0;
-  --border: #00ff41;
-  --input-bg: #0d1a0d;
+  --bg: #f0f4f8;
+  --card: #ffffff;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-active: #1d4ed8;
+  --text: #1e293b;
+  --text-sub: #64748b;
+  --text-placeholder: #94a3b8;
+  --border: #e2e8f0;
+  --input-bg: #f8fafc;
+  --red: #ef4444;
+  --orange: #f97316;
+  --green: #22c55e;
+  --gold: #f59e0b;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 body {
   background-color: var(--bg);
-  color: var(--green);
-  font-family: 'Press Start 2P', monospace;
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 16px;
+  padding: 24px 16px;
 }
 
 /* =====================================================
@@ -39,40 +45,38 @@ body {
   width: 100%;
   max-width: 728px;
   min-height: 90px;
-  background: #111118;
-  border: 2px solid #1a1a2e;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .ad-top {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .ad-bottom {
-  margin-top: 24px;
+  margin-top: 20px;
 }
 
 /* =====================================================
-   게임 컨테이너
+   게임 카드
    ===================================================== */
 
 .game-container {
   width: 100%;
-  max-width: 480px;
-  padding: 32px 28px;
-  background: #0d0d14;
-  /* 픽셀 아트 박스 - 이중 테두리 */
-  box-shadow:
-    0 0 0 2px var(--green),
-    0 0 0 4px var(--bg),
-    0 0 0 6px var(--green-dim),
-    0 0 24px rgba(0, 255, 65, 0.15);
+  max-width: 420px;
+  padding: 36px 32px;
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
 }
 
 /* =====================================================
@@ -80,21 +84,19 @@ body {
    ===================================================== */
 
 .game-title {
-  font-size: 2rem;
-  color: var(--green);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--text);
   text-align: center;
-  line-height: 1.6;
-  text-shadow:
-    2px 2px 0 var(--green-dim),
-    0 0 16px rgba(0, 255, 65, 0.6);
-  letter-spacing: 2px;
+  line-height: 1.3;
+  letter-spacing: -0.5px;
 }
 
 .game-subtitle {
-  font-size: 0.65rem;
-  color: var(--green-dim);
-  letter-spacing: 4px;
-  margin-top: -16px;
+  font-size: 0.9rem;
+  color: var(--text-sub);
+  text-align: center;
+  margin-top: -8px;
 }
 
 /* =====================================================
@@ -102,17 +104,24 @@ body {
    ===================================================== */
 
 .attempts-display {
-  font-size: 0.6rem;
-  color: var(--green-dim);
-  letter-spacing: 2px;
   display: flex;
-  gap: 8px;
   align-items: center;
+  gap: 6px;
+  background: var(--bg);
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+}
+
+.attempts-label {
+  color: var(--text-sub);
+  font-weight: 400;
 }
 
 .attempts-count {
-  font-size: 0.9rem;
-  color: var(--green);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
 }
 
 /* =====================================================
@@ -122,7 +131,7 @@ body {
 .input-area {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
 }
 
@@ -130,19 +139,15 @@ body {
   width: 100%;
   padding: 14px 16px;
   background: var(--input-bg);
-  color: var(--green);
-  font-family: 'Press Start 2P', monospace;
-  font-size: 1rem;
-  border: none;
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: 2px solid var(--border);
+  border-radius: 10px;
   outline: none;
-  /* 픽셀 테두리 */
-  box-shadow:
-    0 0 0 2px var(--green),
-    inset 0 0 0 1px var(--green-dim);
-  caret-color: var(--green);
   text-align: center;
-  letter-spacing: 4px;
-  /* 숫자 스피너 숨기기 */
+  transition: border-color 0.15s, box-shadow 0.15s;
   -moz-appearance: textfield;
 }
 
@@ -153,58 +158,55 @@ body {
 }
 
 .guess-input::placeholder {
-  color: var(--green-dim);
-  opacity: 0.5;
-  font-size: 0.6rem;
+  color: var(--text-placeholder);
+  font-weight: 400;
+  font-size: 1rem;
 }
 
 .guess-input:focus {
-  box-shadow:
-    0 0 0 2px var(--green),
-    inset 0 0 0 1px var(--green),
-    0 0 12px rgba(0, 255, 65, 0.3);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  background: #fff;
 }
 
 .guess-input:disabled {
-  opacity: 0.4;
+  opacity: 0.5;
   cursor: not-allowed;
+  background: var(--bg);
 }
 
 .submit-btn {
   width: 100%;
   padding: 14px 16px;
-  background: var(--green);
-  color: var(--bg);
-  font-family: 'Press Start 2P', monospace;
-  font-size: 0.8rem;
+  background: var(--primary);
+  color: #fff;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
   border: none;
+  border-radius: 10px;
   cursor: pointer;
-  letter-spacing: 2px;
-  /* 픽셀 버튼 그림자 */
-  box-shadow:
-    4px 4px 0 var(--green-dim);
-  transition: all 0.05s;
-  position: relative;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
 }
 
 .submit-btn:hover {
-  background: var(--bg);
-  color: var(--green);
-  box-shadow:
-    4px 4px 0 var(--green),
-    0 0 0 2px var(--green);
+  background: var(--primary-hover);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
 }
 
 .submit-btn:active {
-  transform: translate(4px, 4px);
+  background: var(--primary-active);
+  transform: translateY(1px);
   box-shadow: none;
 }
 
 .submit-btn:disabled {
-  opacity: 0.4;
+  opacity: 0.45;
   cursor: not-allowed;
   transform: none;
-  box-shadow: 4px 4px 0 var(--green-dim);
+  box-shadow: none;
 }
 
 /* =====================================================
@@ -214,66 +216,70 @@ body {
 .message-area {
   width: 100%;
   min-height: 80px;
-  padding: 16px;
-  background: #0a0a10;
-  box-shadow: 0 0 0 2px #1a1a2e;
+  padding: 16px 20px;
+  background: var(--bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   text-align: center;
 }
 
 .message-icon {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   line-height: 1;
-  min-height: 1.4rem;
+  min-height: 1.6rem;
 }
 
 .message-text {
-  font-size: 0.55rem;
-  line-height: 1.8;
-  color: var(--green-dim);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-sub);
+  font-weight: 400;
   word-break: keep-all;
 }
 
 .message-text.error {
   color: var(--red);
+  font-weight: 600;
 }
 
 .message-text.hint-low {
-  color: var(--red);
+  color: var(--orange);
+  font-weight: 600;
 }
 
 .message-text.hint-high {
-  color: var(--red);
+  color: var(--orange);
+  font-weight: 600;
 }
 
 .message-text.win {
   color: var(--gold);
-  font-size: 0.65rem;
+  font-size: 1.05rem;
+  font-weight: 700;
 }
 
 .message-text.lose {
   color: var(--red);
+  font-weight: 700;
 }
 
 /* =====================================================
-   승리 깜빡임 애니메이션
+   승리 애니메이션
    ===================================================== */
 
-@keyframes win-blink {
-  0%, 100% { opacity: 1; text-shadow: 0 0 20px var(--gold), 0 0 40px var(--gold); }
-  50% { opacity: 0.4; text-shadow: none; }
+@keyframes win-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
 }
 
-@keyframes cursor-blink {
-  0%, 100% { border-color: var(--green); }
-  50% { border-color: transparent; }
-}
-
-.message-text.win {
-  animation: win-blink 0.8s ease-in-out infinite;
+.message-area:has(.win) {
+  background: #fffbeb;
+  border-color: #fde68a;
+  animation: win-pulse 1s ease-in-out infinite;
 }
 
 /* =====================================================
@@ -284,24 +290,24 @@ body {
   width: 100%;
   padding: 12px 16px;
   background: transparent;
-  color: var(--green-dim);
-  font-family: 'Press Start 2P', monospace;
-  font-size: 0.6rem;
-  border: none;
+  color: var(--text-sub);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 2px solid var(--border);
+  border-radius: 10px;
   cursor: pointer;
-  letter-spacing: 2px;
-  box-shadow: 0 0 0 2px var(--green-dim);
-  transition: all 0.05s;
+  transition: all 0.15s;
 }
 
 .restart-btn:hover {
-  color: var(--green);
-  box-shadow: 0 0 0 2px var(--green);
-  background: rgba(0, 255, 65, 0.05);
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(59, 130, 246, 0.04);
 }
 
 .restart-btn:active {
-  background: rgba(0, 255, 65, 0.1);
+  background: rgba(59, 130, 246, 0.08);
 }
 
 .hidden {
@@ -313,16 +319,16 @@ body {
    ===================================================== */
 
 @media (max-width: 480px) {
-  .game-title {
-    font-size: 1.4rem;
-  }
-
   .game-container {
-    padding: 24px 16px;
+    padding: 28px 20px;
+    border-radius: 12px;
   }
 
-  .guess-input,
-  .submit-btn {
-    font-size: 0.75rem;
+  .game-title {
+    font-size: 1.3rem;
+  }
+
+  .guess-input {
+    font-size: 1.1rem;
   }
 }
