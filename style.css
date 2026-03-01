@@ -1,0 +1,328 @@
+/* =====================================================
+   숫자 맞추기 게임 - 레트로 픽셀 스타일
+   ===================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  image-rendering: pixelated;
+}
+
+:root {
+  --bg: #0a0a0f;
+  --green: #00ff41;
+  --green-dim: #00aa2b;
+  --red: #ff4136;
+  --gold: #ffd700;
+  --white: #e0e0e0;
+  --border: #00ff41;
+  --input-bg: #0d1a0d;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--green);
+  font-family: 'Press Start 2P', monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px;
+}
+
+/* =====================================================
+   광고 배너
+   ===================================================== */
+
+.ad-banner {
+  width: 100%;
+  max-width: 728px;
+  min-height: 90px;
+  background: #111118;
+  border: 2px solid #1a1a2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ad-top {
+  margin-bottom: 24px;
+}
+
+.ad-bottom {
+  margin-top: 24px;
+}
+
+/* =====================================================
+   게임 컨테이너
+   ===================================================== */
+
+.game-container {
+  width: 100%;
+  max-width: 480px;
+  padding: 32px 28px;
+  background: #0d0d14;
+  /* 픽셀 아트 박스 - 이중 테두리 */
+  box-shadow:
+    0 0 0 2px var(--green),
+    0 0 0 4px var(--bg),
+    0 0 0 6px var(--green-dim),
+    0 0 24px rgba(0, 255, 65, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* =====================================================
+   타이틀
+   ===================================================== */
+
+.game-title {
+  font-size: 2rem;
+  color: var(--green);
+  text-align: center;
+  line-height: 1.6;
+  text-shadow:
+    2px 2px 0 var(--green-dim),
+    0 0 16px rgba(0, 255, 65, 0.6);
+  letter-spacing: 2px;
+}
+
+.game-subtitle {
+  font-size: 0.65rem;
+  color: var(--green-dim);
+  letter-spacing: 4px;
+  margin-top: -16px;
+}
+
+/* =====================================================
+   시도 횟수
+   ===================================================== */
+
+.attempts-display {
+  font-size: 0.6rem;
+  color: var(--green-dim);
+  letter-spacing: 2px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.attempts-count {
+  font-size: 0.9rem;
+  color: var(--green);
+}
+
+/* =====================================================
+   입력 영역
+   ===================================================== */
+
+.input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.guess-input {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--input-bg);
+  color: var(--green);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  /* 픽셀 테두리 */
+  box-shadow:
+    0 0 0 2px var(--green),
+    inset 0 0 0 1px var(--green-dim);
+  caret-color: var(--green);
+  text-align: center;
+  letter-spacing: 4px;
+  /* 숫자 스피너 숨기기 */
+  -moz-appearance: textfield;
+}
+
+.guess-input::-webkit-outer-spin-button,
+.guess-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.guess-input::placeholder {
+  color: var(--green-dim);
+  opacity: 0.5;
+  font-size: 0.6rem;
+}
+
+.guess-input:focus {
+  box-shadow:
+    0 0 0 2px var(--green),
+    inset 0 0 0 1px var(--green),
+    0 0 12px rgba(0, 255, 65, 0.3);
+}
+
+.guess-input:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--green);
+  color: var(--bg);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 2px;
+  /* 픽셀 버튼 그림자 */
+  box-shadow:
+    4px 4px 0 var(--green-dim);
+  transition: all 0.05s;
+  position: relative;
+}
+
+.submit-btn:hover {
+  background: var(--bg);
+  color: var(--green);
+  box-shadow:
+    4px 4px 0 var(--green),
+    0 0 0 2px var(--green);
+}
+
+.submit-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.submit-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 4px 4px 0 var(--green-dim);
+}
+
+/* =====================================================
+   메시지 영역
+   ===================================================== */
+
+.message-area {
+  width: 100%;
+  min-height: 80px;
+  padding: 16px;
+  background: #0a0a10;
+  box-shadow: 0 0 0 2px #1a1a2e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.message-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  min-height: 1.4rem;
+}
+
+.message-text {
+  font-size: 0.55rem;
+  line-height: 1.8;
+  color: var(--green-dim);
+  word-break: keep-all;
+}
+
+.message-text.error {
+  color: var(--red);
+}
+
+.message-text.hint-low {
+  color: var(--red);
+}
+
+.message-text.hint-high {
+  color: var(--red);
+}
+
+.message-text.win {
+  color: var(--gold);
+  font-size: 0.65rem;
+}
+
+.message-text.lose {
+  color: var(--red);
+}
+
+/* =====================================================
+   승리 깜빡임 애니메이션
+   ===================================================== */
+
+@keyframes win-blink {
+  0%, 100% { opacity: 1; text-shadow: 0 0 20px var(--gold), 0 0 40px var(--gold); }
+  50% { opacity: 0.4; text-shadow: none; }
+}
+
+@keyframes cursor-blink {
+  0%, 100% { border-color: var(--green); }
+  50% { border-color: transparent; }
+}
+
+.message-text.win {
+  animation: win-blink 0.8s ease-in-out infinite;
+}
+
+/* =====================================================
+   다시 시작 버튼
+   ===================================================== */
+
+.restart-btn {
+  width: 100%;
+  padding: 12px 16px;
+  background: transparent;
+  color: var(--green-dim);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 2px;
+  box-shadow: 0 0 0 2px var(--green-dim);
+  transition: all 0.05s;
+}
+
+.restart-btn:hover {
+  color: var(--green);
+  box-shadow: 0 0 0 2px var(--green);
+  background: rgba(0, 255, 65, 0.05);
+}
+
+.restart-btn:active {
+  background: rgba(0, 255, 65, 0.1);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* =====================================================
+   반응형
+   ===================================================== */
+
+@media (max-width: 480px) {
+  .game-title {
+    font-size: 1.4rem;
+  }
+
+  .game-container {
+    padding: 24px 16px;
+  }
+
+  .guess-input,
+  .submit-btn {
+    font-size: 0.75rem;
+  }
+}

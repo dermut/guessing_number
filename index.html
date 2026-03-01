@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>숫자 맞추기 게임</title>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N77BGB60Z2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-N77BGB60Z2');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+     crossorigin="anonymous"></script>
+
+  <!-- Press Start 2P Pixel Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 상단 광고 배너 -->
+  <div class="ad-banner ad-top">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <main class="game-container">
+    <h1 class="game-title">숫자<br>맞추기</h1>
+    <p class="game-subtitle">1 ~ 100</p>
+
+    <div class="attempts-display">
+      <span class="attempts-label">시도:</span>
+      <span class="attempts-count" id="attempts-count">0</span>
+      <span class="attempts-label">/ 10</span>
+    </div>
+
+    <div class="input-area">
+      <input
+        type="number"
+        id="guess-input"
+        class="guess-input"
+        min="1"
+        max="100"
+        step="1"
+        placeholder="숫자 입력"
+        autocomplete="off"
+      >
+      <button id="submit-btn" class="submit-btn" onclick="submitGuess()">
+        &gt; 확인
+      </button>
+    </div>
+
+    <div class="message-area" id="message-area">
+      <div class="message-icon" id="message-icon"></div>
+      <div class="message-text" id="message-text">숫자를 맞춰보세요!</div>
+    </div>
+
+    <button id="restart-btn" class="restart-btn hidden" onclick="restartGame()">
+      [ 다시 시작 ]
+    </button>
+  </main>
+
+  <!-- 하단 광고 배너 -->
+  <div class="ad-banner ad-bottom">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <script src="game.js"></script>
+  <script>
+    // Enter key submission
+    document.getElementById('guess-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') submitGuess();
+    });
+  </script>
+</body>
+</html>
